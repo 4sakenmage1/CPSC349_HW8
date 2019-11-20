@@ -17,9 +17,9 @@ class Board extends React.Component {
   renderSquare(i) {
     let color = "white";
 
-    if(this.object.winningSet){
-      for(let j = 0; j< this.winningSet.length; j++){
-        if(i === this.winningSet[j]){
+    if(this.object.winningSets){
+      for(let j = 0; j< this.winningSets.length; j++){
+        if(i === this.winningSets[j]){
           color = "red";
         }
       }
@@ -32,7 +32,7 @@ class Board extends React.Component {
     let position = 0;
     for(let i = 0; i < this.boardsize; i++){
       let innerList = [];
-      for(let j = i; j<this.boardsize + i; j++){
+      for(let j = 0; j < this.boardsize; j++){
         innerList.push(<div>{this.renderSquare(position)}</div>);
       }
       itemList.push(<div className="board-row">{innerList}</div>);
@@ -45,8 +45,7 @@ class Game extends React.Component {
   constructor(object) {
   super(object);
   this.state = {
-    history: [{squares: Array(9).fill(null)}
-    ],
+    history: [{squares: Array(9).fill(null)}],
     stepNum: 0,
     xIsNext: true,
     size: 0,
@@ -267,18 +266,6 @@ function calculateWinner(squares, size){
         squares[a] === squares[c] &&
         squares[a] === squares[d] &&
         squares[a] === squares[e]
-      ) {
-        return [squares[a], lines[i]];
-      }
-    } else if (size === 6) {
-      const [a, b, c, d, e, f] = lines[i];
-      if (
-        squares[a] &&
-        squares[a] === squares[b] &&
-        squares[a] === squares[c] &&
-        squares[a] === squares[d] &&
-        squares[a] === squares[e] &&
-        squares[a] === squares[f]
       ) {
         return [squares[a], lines[i]];
       }
