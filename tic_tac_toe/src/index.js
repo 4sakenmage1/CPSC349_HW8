@@ -24,22 +24,19 @@ class Board extends React.Component {
         }
       }
     }
-    return (
-      <Square color = {color} value = {this.object.squares[i]} onClick = {() => this.object.onClick(i)} />
-    );
+    return (<Square color = {color} value = {this.object.squares[i]} onClick = {() => this.object.onClick(i)} />);
   }
 
   render() {
     let itemList = [];
     let position = 0;
-    for(let i = 0; i < this.object.boardSize; i++){
+    for(let i = 0; i < this.boardsize; i++){
       let innerList = [];
-      for(let j = i; j<this.object.boardSize + i; j++){
-        innerList.push(<>{this.renderSquare(position)}</>);
+      for(let j = i; j<this.boardsize + i; j++){
+        innerList.push(<div>{this.renderSquare(position)}</div>);
       }
       itemList.push(<div className="board-row">{innerList}</div>);
     }
-
     return ( <div>{itemList}</div>);
   }
 }
@@ -168,7 +165,7 @@ render(){
               style={{ display: this.state.size === 0 ? "none" : "block" }}
               onClick={() => this.setState({ asc: !this.state.asc })}
             >
-              Toggle Ascending/Decending Order
+              Ascending/Decending
             </button>
             <div style={{ display: this.state.size === 0 ? "block" : "none" }}>
               <button
@@ -194,22 +191,11 @@ render(){
               >
                 5x5
               </button>
-              <button
-                onClick={() => {
-                  this.setState({ size: 6 });
-                }}
-              >
-                6x6
-              </button>
             </div>
             <ol>{moves}</ol>   
           </div>
         </div>
       );}
-
-
-
-
   //Game End
 }
 
